@@ -11,6 +11,8 @@ const percentFormatter = new Intl.NumberFormat(
   {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
+    
+
   }
 );
 

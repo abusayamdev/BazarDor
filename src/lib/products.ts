@@ -15,7 +15,6 @@ function isObject(
   );
 }
 
-// Handle common JSON response wrappers
 function extractProducts(data: unknown): unknown[] {
   if (Array.isArray(data)) {
     return data;
@@ -43,7 +42,6 @@ function extractProducts(data: unknown): unknown[] {
   throw new Error("Products array not found");
 }
 
-// Validate required product fields
 function isProduct(value: unknown): value is Product {
   if (!isObject(value) || !isObject(value.change)) {
     return false;
@@ -67,20 +65,23 @@ function isProduct(value: unknown): value is Product {
   );
 }
 
-// Fetch all products from the API
-export async function getProducts(): Promise<Product[]> {
+async function fetchProducts(
+  category?: string
+): Promise<Product[]> {
+  const query = category
+    ? `?${new URLSearchParams({ category })}`
+    : "";
+
   const response = await fetch(
-    `${BASE_URL.replace(/\/$/, "")}/products`,
+    `${BASE_URL.replace(/\/$/, "")}/products${query}`,
     {
-      next: {
-        revalidate: 60,
-      },
+      next: { revalidate: 60 },
     }
   );
 
   if (!response.ok) {
     throw new Error(
-      `Product API failed: ${response.status}`
+      `Failed to fetch products: ${response.status}`
     );
   }
 
@@ -88,10 +89,18 @@ export async function getProducts(): Promise<Product[]> {
   const products = extractProducts(data);
 
   if (!products.every(isProduct)) {
-    throw new Error(
-      "Product fields do not match expected structure"
-    );
+    throw new Error("Invalid product data received");
   }
 
   return products;
+}
+
+export async function getProducts(): Promise<Product[]> {
+  return fetchProducts();
+}
+
+export async function getProductsByCategory(
+  slug: string
+): Promise<Product[]> {
+  return fetchProducts(slug);
 }
