@@ -1,26 +1,87 @@
-@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+@plugin "daisyui/theme" {
+  name: "bazardor";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Base Colors */
+  --color-base-100: #fafcfa;
+  --color-base-200: #f0f5f0;
+  --color-base-300: #e1e8e1;
+  --color-base-content: #1d271f;
+
+  /* Primary Brand */
+  --color-primary: #05893e;
+  --color-primary-content: #ffffff;
+
+  /* Secondary */
+  --color-secondary: #dfeee3;
+  --color-secondary-content: #1d271f;
+
+  /* Accent */
+  --color-accent: #047f39;
+  --color-accent-content: #ffffff;
+
+  /* Neutral */
+  --color-neutral: #1d271f;
+  --color-neutral-content: #ffffff;
+
+  /* Info */
+  --color-info: #2563eb;
+  --color-info-content: #ffffff;
+
+  /* Success */
+  --color-success: #1a9951;
+  --color-success-content: #ffffff;
+
+  /* Warning */
+  --color-warning: #d18b0a;
+  --color-warning-content: #1d271f;
+
+  /* Error */
+  --color-error: #d03739;
+  --color-error-content: #ffffff;
+
+  /* Component Radius */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+
+  /* Component Sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Component Border and Effects */
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
+
+/* =====================================
+   HIND SILIGURI FONT
+===================================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-hind-siliguri);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =====================================
+   GLOBAL BASE STYLES
+===================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
