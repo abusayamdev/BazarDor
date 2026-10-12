@@ -19,23 +19,16 @@ export default function BanglaDate() {
       setDate(today);
     };
 
-    // Show the current date after mounting.
     updateDate();
 
-    // Keep the date updated if the page stays open.
-    const interval = setInterval(updateDate, 60_000);
+    const interval = setInterval(updateDate, 60000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <time
-      className="
-        block max-w-[120px] truncate
-        text-[10px] leading-4
-        text-base-content/60
-        sm:max-w-none sm:text-xs
-      "
+      className="block max-w-[120px] truncate text-[10px] leading-4 text-base-content/60 sm:max-w-none sm:text-xs"
       title={date}
     >
       {date}

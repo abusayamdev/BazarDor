@@ -1,8 +1,13 @@
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getCategories } from "@/lib/categories";
+
+// =====================================
+// TYPES
+// =====================================
 
 interface CategoryPageProps {
   params: Promise<{
@@ -10,35 +15,55 @@ interface CategoryPageProps {
   }>;
 }
 
-export default async function CategoryPage({
+// =====================================
+// LOADING COMPONENT
+// =====================================
+
+function CategoryLoading() {
+  return (
+    <div className="animate-pulse rounded-2xl border border-base-300 bg-base-100 p-6 sm:p-10">
+      <div className="mb-5 h-12 w-12 rounded-lg bg-base-200" />
+
+      <div className="mb-4 h-8 w-48 rounded-lg bg-base-200" />
+
+      <div className="h-4 w-72 max-w-full rounded-lg bg-base-200" />
+    </div>
+  );
+}
+
+// =====================================
+// DYNAMIC CATEGORY CONTENT
+// =====================================
+
+async function CategoryContent({
   params,
 }: CategoryPageProps) {
-  // Get slug from dynamic URL
   const { slug } = await params;
 
   let categories;
 
   try {
-    // Fetch real categories from API
     categories = await getCategories();
-  } catch {
-    return (
-      <section className="mx-auto max-w-[1120px] px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-error">
-          ক্যাটাগরি লোড করা যাচ্ছে না
-        </h1>
+  } catch (error) {
+    console.error("Category API Error:", error);
 
-        <Link
-          href="/"
-          className="btn btn-primary mt-6"
-        >
+    return (
+      <div className="rounded-2xl border border-error/20 bg-base-100 p-8 text-center">
+        <h2 className="text-xl font-bold text-error">
+          ক্যাটাগরি লোড করা যাচ্ছে না
+        </h2>
+
+        <p className="mt-3 text-base-content/60">
+          কিছুক্ষণ পর আবার চেষ্টা করুন।
+        </p>
+
+        <Link href="/" className="btn btn-primary mt-6">
           হোম পেজে ফিরে যান
         </Link>
-      </section>
+      </div>
     );
   }
 
-  // Find current category using its slug
   const category = categories.find(
     (item) => item.slug === slug
   );
@@ -48,42 +73,47 @@ export default async function CategoryPage({
   }
 
   return (
-    <section
-      className="
-        mx-auto w-full max-w-[1120px]
-        px-4 py-12 sm:px-6
-      "
-    >
-      <div
-        className="
-          rounded-2xl border border-base-300
-          bg-base-100 p-6 sm:p-10
-        "
+    <div className="rounded-2xl border border-base-300 bg-base-100 p-6 sm:p-10">
+      {/* Category Icon */}
+      {category.icon && (
+        <span className="text-5xl">
+          {category.icon}
+        </span>
+      )}
+
+      {/* Category Name */}
+      <h1 className="mt-5 text-3xl font-bold text-base-content">
+        {category.nameBn}
+      </h1>
+
+      {/* Temporary Description */}
+      <p className="mt-3 text-base-content/70">
+        এই ক্যাটাগরির পণ্যগুলো পরবর্তী ধাপে
+        API থেকে দেখানো হবে।
+      </p>
+
+      <Link
+        href="/"
+        className="btn btn-primary mt-6"
       >
-        {/* Category Icon */}
-        {category.icon && (
-          <span className="text-5xl">
-            {category.icon}
-          </span>
-        )}
+        হোম পেজে ফিরে যান
+      </Link>
+    </div>
+  );
+}
 
-        {/* Category Name */}
-        <h1 className="mt-5 text-3xl font-bold text-base-content">
-          {category.nameBn}
-        </h1>
+// =====================================
+// CATEGORY PAGE
+// =====================================
 
-        <p className="mt-3 text-base-content/70">
-          এই ক্যাটাগরির পণ্যগুলো পরবর্তী ধাপে
-          API থেকে দেখানো হবে।
-        </p>
-
-        <Link
-          href="/"
-          className="btn btn-primary mt-6"
-        >
-          হোম পেজে ফিরে যান
-        </Link>
-      </div>
-    </section>
+export default function CategoryPage({
+  params,
+}: CategoryPageProps) {
+  return (
+    <main className="mx-auto w-full max-w-[1120px] px-4 py-12 sm:px-6">
+      <Suspense fallback={<CategoryLoading />}>
+        <CategoryContent params={params} />
+      </Suspense>
+    </main>
   );
 }

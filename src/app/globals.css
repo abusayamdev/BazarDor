@@ -85,3 +85,26 @@
     }
   }
 }
+
+
+
+/* =========================================
+   BAZARDOR PRICE TICKER ANIMATION
+   Tailwind CSS v4
+========================================= */
+
+@theme {
+  --animate-bazardor-ticker:
+    bazardor-ticker-scroll 60s linear infinite;
+
+  @keyframes bazardor-ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+

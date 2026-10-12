@@ -6,18 +6,14 @@ import AuthButtons from "./AuthButtons";
 import CategoryNav from "./CategoryNav";
 import CategoryNavLoading from "./CategoryNavLoading";
 
+import PriceTicker from "@/components/price-ticker/PriceTicker";
+import PriceTickerLoading from "@/components/price-ticker/PriceTickerLoading";
+
 export default function Navbar() {
   return (
-    <header
-      className="
-        w-full border-b
-        border-base-300 bg-base-100
-      "
-    >
-      {/* =================================
-          FIRST ROW: LOGO + AUTH BUTTONS
-      ================================= */}
+    <header className="w-full bg-base-100">
 
+      {/* First Row: Logo, Date, Auth */}
       <div
         className="
           mx-auto flex h-[68px]
@@ -27,16 +23,17 @@ export default function Navbar() {
         "
       >
         <BrandLogo />
-
         <AuthButtons />
       </div>
 
-      {/* =================================
-          SECOND ROW: API CATEGORIES
-      ================================= */}
-
+      {/* Second Row: Category Navigation */}
       <Suspense fallback={<CategoryNavLoading />}>
         <CategoryNav />
+      </Suspense>
+
+      {/* Third Row: Dynamic Price Ticker */}
+      <Suspense fallback={<PriceTickerLoading />}>
+        <PriceTicker />
       </Suspense>
 
     </header>
