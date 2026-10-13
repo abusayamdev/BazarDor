@@ -47,21 +47,21 @@ function isProduct(value: unknown): value is Product {
     return false;
   }
 
-  const change = value.change;
-
   return (
     typeof value.id === "number" &&
+    typeof value.slug === "string" &&
+    value.slug.length > 0 &&
     typeof value.nameBn === "string" &&
     typeof value.unit === "string" &&
     typeof value.today === "number" &&
     Number.isFinite(value.today) &&
     (
-      change.dir === "up" ||
-      change.dir === "down" ||
-      change.dir === "flat"
+      value.change.dir === "up" ||
+      value.change.dir === "down" ||
+      value.change.dir === "flat"
     ) &&
-    typeof change.pct === "number" &&
-    Number.isFinite(change.pct)
+    typeof value.change.pct === "number" &&
+    Number.isFinite(value.change.pct)
   );
 }
 

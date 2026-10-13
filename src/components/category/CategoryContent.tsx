@@ -15,31 +15,23 @@ interface CategoryContentProps {
 
 export default async function CategoryContent({
   params,
-
 }: CategoryContentProps) {
-
   const { slug } = await params;
+
   const categories = await getCategories();
 
-  const category = categories.find(
-    (item) => item.slug === slug
-    
-  );
+  const category = categories.find((item) => item.slug === slug);
 
   if (!category) {
     notFound();
   }
 
-  const products = await getProductsByCategory(slug);
+  const products = await getProductsByCategory(category.slug);
 
   return (
     <>
       <CategoryHeader category={category} />
       <CategoryProducts products={products} />
     </>
-
   );
-
-
-
 }

@@ -25,7 +25,7 @@ export default function ProductCard({
 
   return (
     <Link
-      href={`/product/${product.id}`}
+      href={`/product/${encodeURIComponent(product.slug)}`}
       aria-label={`${product.nameBn} এর বিস্তারিত দেখুন`}
       className="group flex h-full flex-col rounded-xl border border-base-300 bg-base-100 p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary sm:p-5"
     >

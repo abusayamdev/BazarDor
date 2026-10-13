@@ -3,6 +3,7 @@ export type PriceDirection = "up" | "down" | "flat";
 
 export interface Product {
   id: number;
+  slug: string;
   nameBn: string;
   image?: string;
   categoryIcon?: string;

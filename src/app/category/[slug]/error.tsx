@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface CategoryErrorProps {
   error: Error & { digest?: string };
@@ -9,18 +10,22 @@ interface CategoryErrorProps {
 }
 
 export default function CategoryError({
+  error,
   reset,
 }: CategoryErrorProps) {
+  useEffect(() => {
+    console.error("Category page error:", error);
+  }, [error]);
+
   return (
     <main className="mx-auto w-full max-w-[1152px] px-4 py-16">
-      <div className="rounded-xl border border-error/20 bg-base-100 px-6 py-16 text-center">
+      <div className="rounded-2xl border border-error/20 bg-base-100 px-6 py-16 text-center">
         <h1 className="text-2xl font-bold text-error">
-          কিছু একটা সমস্যা হয়েছে
+          ক্যাটাগরি লোড করা যাচ্ছে না
         </h1>
 
         <p className="mt-3 text-sm text-base-content/60">
-          ক্যাটাগরির তথ্য লোড করা যাচ্ছে না।
-          অনুগ্রহ করে আবার চেষ্টা করুন।
+          তথ্য লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

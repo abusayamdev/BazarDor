@@ -10,9 +10,7 @@ interface CategoryPageProps {
   }>;
 }
 
-export default function CategoryPage({
-  params,
-}: CategoryPageProps) {
+export default function CategoryPage({ params }: CategoryPageProps) {
   return (
     <main className="mx-auto w-full max-w-[1152px] px-4 py-10 sm:py-12">
       <Suspense fallback={<CategoryLoading />}>
