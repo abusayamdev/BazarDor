@@ -61,6 +61,7 @@ function isProductDetail(value: unknown): value is ProductDetail {
     Number.isFinite(value.lastWeek) &&
     typeof value.lastMonth === "number" &&
     Number.isFinite(value.lastMonth) &&
+    
     ["up", "down", "flat"].includes(
       String(value.change.dir)
     ) &&
