@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -14,9 +13,7 @@ interface CategoryProductsProps {
   products: Product[];
 }
 
-export default function CategoryProducts({
-  products,
-}: CategoryProductsProps) {
+export default function CategoryProducts({ products }: CategoryProductsProps) {
   const [sortOrder, setSortOrder] = useState<SortOrder>("default");
 
   const sortedProducts = useMemo(() => {
@@ -33,9 +30,7 @@ export default function CategoryProducts({
     });
   }, [products, sortOrder]);
 
-  const productCount = new Intl.NumberFormat("bn-BD").format(
-    products.length
-  );
+  const productCount = new Intl.NumberFormat("bn-BD").format(products.length);
 
   return (
     <section>
@@ -62,12 +57,8 @@ export default function CategoryProducts({
               className="w-full appearance-none rounded-lg border border-base-300 bg-base-100 px-4 py-2.5 pr-10 text-sm text-base-content outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
             >
               <option value="default">ডিফল্ট</option>
-              <option value="low-to-high">
-                দাম: কম থেকে বেশি
-              </option>
-              <option value="high-to-low">
-                দাম: বেশি থেকে কম
-              </option>
+              <option value="low-to-high">দাম: কম থেকে বেশি</option>
+              <option value="high-to-low">দাম: বেশি থেকে কম</option>
             </select>
 
             <svg

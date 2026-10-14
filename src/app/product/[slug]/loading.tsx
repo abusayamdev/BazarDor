@@ -1,4 +1,3 @@
-
 import ProductDetailsLoading from "@/components/product-details/ProductDetailsLoading";
 
 export default function Loading() {

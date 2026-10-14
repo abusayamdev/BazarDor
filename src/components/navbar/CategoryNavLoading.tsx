@@ -1,4 +1,3 @@
-
 export default function CategoryNavLoading() {
   return (
     <div
@@ -29,9 +28,7 @@ export default function CategoryNavLoading() {
         ))}
       </div>
 
-      <span className="sr-only">
-        ক্যাটাগরি লোড হচ্ছে...
-      </span>
+      <span className="sr-only">ক্যাটাগরি লোড হচ্ছে...</span>
     </div>
   );
 }

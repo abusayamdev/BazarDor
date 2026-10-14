@@ -1,4 +1,3 @@
-
 import CategoryEmptyState from "@/components/category/CategoryEmptyState";
 
 export default function CategoryNotFound() {

@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 import type { ProductDetail } from "@/types/product-detail";
@@ -12,14 +11,11 @@ interface ProductDetailsHeaderProps {
 
 export default function ProductDetailsHeader({
   product,
-  
 }: ProductDetailsHeaderProps) {
   const image = product.image?.trim();
 
   const emoji =
-    image &&
-    !image.startsWith("http") &&
-    !image.startsWith("/")
+    image && !image.startsWith("http") && !image.startsWith("/")
       ? image
       : product.categoryIcon || "🛒";
 
@@ -60,9 +56,7 @@ export default function ProductDetailsHeader({
 
       <div className="mt-7 flex flex-wrap items-end justify-between gap-4 border-t border-base-300 pt-6">
         <div>
-          <p className="text-sm text-base-content/60">
-            আজকের দাম
-          </p>
+          <p className="text-sm text-base-content/60">আজকের দাম</p>
 
           <p className="mt-1 text-3xl font-bold text-primary">
             {formatPrice(product.today)} টাকা

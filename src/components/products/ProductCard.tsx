@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 import type { Product } from "@/types/product";
@@ -10,9 +9,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-export default function ProductCard({
-  product,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const image = product.image?.trim();
 
   const emoji =
@@ -47,9 +44,7 @@ export default function ProductCard({
 
       <div className="mt-auto pt-5">
         <div className="border-t border-base-300 pt-4">
-          <p className="mb-2 text-xs text-base-content/60">
-            আজকের দাম
-          </p>
+          <p className="mb-2 text-xs text-base-content/60">আজকের দাম</p>
 
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xl font-bold text-base-content">

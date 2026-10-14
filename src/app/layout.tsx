@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 
@@ -6,6 +5,7 @@ import Navbar from "@/components/navbar/Navbar";
 import AuthToaster from "@/components/auth/AuthToaster";
 
 import "./globals.css";
+import Footer from "@/components/Footer/Footer";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali", "latin"],
@@ -32,17 +32,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="bn"
-      data-theme="bazardor"
-      className={hindSiliguri.variable}
-    >
+    <html lang="bn" data-theme="bazardor" className={hindSiliguri.variable}>
       <body className="min-h-screen bg-base-100 font-sans text-base-content antialiased">
         <Navbar />
 
-        <main className="min-h-[calc(100vh-154px)]">
-          {children}
-        </main>
+        <main className="min-h-[calc(100vh-154px)]">{children}</main>
+
+        <Footer />
 
         <AuthToaster />
       </body>

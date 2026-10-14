@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -67,7 +66,10 @@ export default function SignInForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <div>
-        <label htmlFor="signin-email" className="mb-2 block text-sm font-medium text-base-content">
+        <label
+          htmlFor="signin-email"
+          className="mb-2 block text-sm font-medium text-base-content"
+        >
           ইমেইল অ্যাড্রেস
         </label>
 

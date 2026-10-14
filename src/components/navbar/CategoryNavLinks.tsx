@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -9,7 +8,9 @@ interface CategoryNavLinksProps {
   categories: Category[];
 }
 
-export default function CategoryNavLinks({ categories }: CategoryNavLinksProps) {
+export default function CategoryNavLinks({
+  categories,
+}: CategoryNavLinksProps) {
   const pathname = usePathname();
 
   if (categories.length === 0) {

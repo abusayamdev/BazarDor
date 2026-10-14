@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 export default function ProductNotFound() {
@@ -14,8 +13,8 @@ export default function ProductNotFound() {
         </h1>
 
         <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-base-content/60">
-          আপনি যে পণ্যটি খুঁজছেন সেটি পাওয়া যায়নি।
-          অন্য কোনো পণ্য দেখার চেষ্টা করুন।
+          আপনি যে পণ্যটি খুঁজছেন সেটি পাওয়া যায়নি। অন্য কোনো পণ্য দেখার চেষ্টা
+          করুন।
         </p>
 
         <Link href="/" className="btn btn-primary mt-6">

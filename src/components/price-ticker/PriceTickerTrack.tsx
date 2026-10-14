@@ -1,4 +1,3 @@
-
 import type { Product } from "@/types/product";
 import PriceTickerItem from "./PriceTickerItem";
 
@@ -24,18 +23,13 @@ function TickerGroup({
       `}
     >
       {products.map((product) => (
-        <PriceTickerItem
-          key={product.id}
-          product={product}
-        />
+        <PriceTickerItem key={product.id} product={product} />
       ))}
     </div>
   );
 }
 
-export default function PriceTickerTrack({
-  products,
-}: PriceTickerTrackProps) {
+export default function PriceTickerTrack({ products }: PriceTickerTrackProps) {
   return (
     <div
       className="
@@ -47,10 +41,7 @@ export default function PriceTickerTrack({
       <TickerGroup products={products} />
 
       {/* Duplicate for seamless scrolling */}
-      <TickerGroup
-        products={products}
-        duplicate
-      />
+      <TickerGroup products={products} duplicate />
     </div>
   );
 }

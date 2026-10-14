@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 
 import BrandLogo from "./BrandLogo";
@@ -12,7 +11,6 @@ import PriceTickerLoading from "@/components/price-ticker/PriceTickerLoading";
 export default function Navbar() {
   return (
     <header className="w-full bg-base-100">
-
       {/* First Row: Logo, Date, Auth */}
       <div
         className="
@@ -35,7 +33,6 @@ export default function Navbar() {
       <Suspense fallback={<PriceTickerLoading />}>
         <PriceTicker />
       </Suspense>
-
     </header>
   );
 }

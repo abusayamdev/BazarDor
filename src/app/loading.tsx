@@ -1,4 +1,3 @@
-
 import HomeProductsLoading from "@/components/products/HomeProductsLoading";
 
 export default function Loading() {

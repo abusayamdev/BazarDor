@@ -1,4 +1,3 @@
-
 import { getProducts } from "@/lib/products";
 import PriceTickerTrack from "./PriceTickerTrack";
 

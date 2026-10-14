@@ -1,4 +1,3 @@
-
 import type { MarketPrice } from "@/types/product-detail";
 import { formatPrice } from "@/lib/formatters";
 
@@ -12,9 +11,7 @@ export default function ProductPriceSummary({
   if (markets.length === 0) {
     return (
       <section className="rounded-xl border border-base-300 bg-base-100 p-6">
-        <h2 className="text-xl font-bold">
-          বাজারদরের সারসংক্ষেপ
-        </h2>
+        <h2 className="text-xl font-bold">বাজারদরের সারসংক্ষেপ</h2>
 
         <p className="mt-3 text-sm text-base-content/60">
           বর্তমানে বাজারভিত্তিক দামের তথ্য নেই।
@@ -23,13 +20,9 @@ export default function ProductPriceSummary({
     );
   }
 
-  const minimumPrice = Math.min(
-    ...markets.map((market) => market.min)
-  );
+  const minimumPrice = Math.min(...markets.map((market) => market.min));
 
-  const maximumPrice = Math.max(
-    ...markets.map((market) => market.max)
-  );
+  const maximumPrice = Math.max(...markets.map((market) => market.max));
 
   const averagePrice =
     markets.reduce((total, market) => {
@@ -66,9 +59,7 @@ export default function ProductPriceSummary({
             key={item.label}
             className="rounded-xl border border-base-300 bg-base-100 p-6"
           >
-            <p className="text-sm text-base-content/60">
-              {item.label}
-            </p>
+            <p className="text-sm text-base-content/60">{item.label}</p>
 
             <p className={`mt-3 text-2xl font-bold ${item.color}`}>
               {formatPrice(item.price)} টাকা
@@ -78,9 +69,8 @@ export default function ProductPriceSummary({
       </div>
 
       <p className="mt-3 text-xs leading-6 text-base-content/60">
-        গড় দাম প্রতিটি বাজারের সর্বনিম্ন ও সর্বোচ্চ দামের
-        মধ্যবিন্দু থেকে হিসাব করা হয়েছে। এটি আনুমানিক,
-        প্রকৃত লেনদেনের গড় নয়।
+        গড় দাম প্রতিটি বাজারের সর্বনিম্ন ও সর্বোচ্চ দামের মধ্যবিন্দু থেকে হিসাব
+        করা হয়েছে। এটি আনুমানিক, প্রকৃত লেনদেনের গড় নয়।
       </p>
     </section>
   );

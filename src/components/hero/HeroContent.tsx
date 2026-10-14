@@ -1,4 +1,3 @@
-
 export default function HeroContent() {
   return (
     <div className="text-center md:text-left">
@@ -11,15 +10,12 @@ export default function HeroContent() {
         className="mt-3 text-3xl font-bold leading-tight text-base-content sm:text-4xl lg:text-[42px]"
       >
         আজকের বাজারদর
-        <span className="block text-primary">
-          এক নজরে
-        </span>
+        <span className="block text-primary">এক নজরে</span>
       </h1>
 
       <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-base-content/70 md:mx-0 sm:text-base">
-        নিত্যপ্রয়োজনীয় পণ্যের সর্বশেষ বাজারদর,
-        দামের পরিবর্তন এবং বাজারের তথ্য জানুন
-        সহজেই, এক জায়গায়।
+        নিত্যপ্রয়োজনীয় পণ্যের সর্বশেষ বাজারদর, দামের পরিবর্তন এবং বাজারের তথ্য
+        জানুন সহজেই, এক জায়গায়।
       </p>
 
       <a

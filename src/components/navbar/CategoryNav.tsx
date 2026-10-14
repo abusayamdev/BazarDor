@@ -1,4 +1,3 @@
-
 import { getCategories } from "@/lib/categories";
 import CategoryNavLinks from "./CategoryNavLinks";
 
@@ -6,9 +5,7 @@ export default async function CategoryNav() {
   try {
     const categories = await getCategories();
 
-    return (
-      <CategoryNavLinks categories={categories} />
-    );
+    return <CategoryNavLinks categories={categories} />;
   } catch (error) {
     console.error("Category API Error:", error);
 

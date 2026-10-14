@@ -1,4 +1,3 @@
-
 import type { PriceDirection } from "@/types/product";
 import { formatPercentage } from "@/lib/formatters";
 

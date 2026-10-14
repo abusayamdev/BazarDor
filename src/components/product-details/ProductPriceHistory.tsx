@@ -1,4 +1,3 @@
-
 import type { ProductDetail } from "@/types/product-detail";
 import { formatPrice } from "@/lib/formatters";
 
@@ -40,9 +39,7 @@ export default function ProductPriceHistory({
             key={item.label}
             className="rounded-xl border border-base-300 bg-base-100 p-5"
           >
-            <p className="text-sm text-base-content/60">
-              {item.label}
-            </p>
+            <p className="text-sm text-base-content/60">{item.label}</p>
 
             <p className="mt-3 text-xl font-bold text-base-content">
               {formatPrice(item.price)} টাকা

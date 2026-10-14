@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect } from "react";
@@ -10,9 +9,7 @@ interface AuthNoticeProps {
   page: "home" | "signin";
 }
 
-export default function AuthNotice({
-  page,
-}: AuthNoticeProps) {
+export default function AuthNotice({ page }: AuthNoticeProps) {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 

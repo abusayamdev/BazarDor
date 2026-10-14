@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 import AuthCard from "@/components/auth/AuthCard";
@@ -18,7 +17,10 @@ export default function SignUpPage() {
 
         <p className="mt-7 text-center text-sm text-base-content/60">
           ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
-          <Link href="/signin" className="font-semibold text-primary hover:underline">
+          <Link
+            href="/signin"
+            className="font-semibold text-primary hover:underline"
+          >
             সাইন ইন করুন
           </Link>
         </p>

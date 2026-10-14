@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -20,9 +19,7 @@ export default function AuthCard({
           🛒 বাজার দর
         </Link>
 
-        <h1 className="mt-4 text-2xl font-bold text-base-content">
-          {title}
-        </h1>
+        <h1 className="mt-4 text-2xl font-bold text-base-content">{title}</h1>
 
         <p className="mt-2 text-sm leading-6 text-base-content/60">
           {description}
@@ -30,7 +27,6 @@ export default function AuthCard({
       </div>
 
       {children}
-      
     </section>
   );
 }

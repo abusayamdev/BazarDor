@@ -1,4 +1,3 @@
-
 export default function ProductDetailsLoading() {
   return (
     <div
@@ -24,10 +23,7 @@ export default function ProductDetailsLoading() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {Array.from({ length: 3 }).map((_, index) => (
-          <div
-            key={index}
-            className="h-32 rounded-xl bg-base-200"
-          />
+          <div key={index} className="h-32 rounded-xl bg-base-200" />
         ))}
       </div>
 
@@ -42,9 +38,7 @@ export default function ProductDetailsLoading() {
         ))}
       </div>
 
-      <span className="sr-only">
-        পণ্যের বিস্তারিত তথ্য লোড হচ্ছে...
-      </span>
+      <span className="sr-only">পণ্যের বিস্তারিত তথ্য লোড হচ্ছে...</span>
     </div>
   );
 }

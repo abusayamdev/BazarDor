@@ -1,20 +1,13 @@
-
 interface SectionSkeletonProps {
   title: string;
   count: number;
   id?: string;
 }
 
-function SectionSkeleton({
-  title,
-  count,
-  id,
-}: SectionSkeletonProps) {
+function SectionSkeleton({ title, count, id }: SectionSkeletonProps) {
   return (
     <section id={id} className="scroll-mt-6">
-      <h2 className="mb-6 text-2xl font-bold text-base-content">
-        {title}
-      </h2>
+      <h2 className="mb-6 text-2xl font-bold text-base-content">{title}</h2>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: count }).map((_, index) => (
@@ -45,25 +38,13 @@ export default function HomeProductsLoading() {
       aria-label="পণ্য লোড হচ্ছে"
       className="space-y-14 sm:space-y-16"
     >
-      <SectionSkeleton
-        title="আজ দাম বেড়েছে ▲"
-        count={6}
-      />
+      <SectionSkeleton title="আজ দাম বেড়েছে ▲" count={6} />
 
-      <SectionSkeleton
-        title="আজ দাম কমেছে ▼"
-        count={6}
-      />
+      <SectionSkeleton title="আজ দাম কমেছে ▼" count={6} />
 
-      <SectionSkeleton
-        id="সব-পণ্য"
-        title="সব পণ্য"
-        count={6}
-      />
+      <SectionSkeleton id="সব-পণ্য" title="সব পণ্য" count={6} />
 
-      <span className="sr-only">
-        পণ্যের তথ্য লোড হচ্ছে...
-      </span>
+      <span className="sr-only">পণ্যের তথ্য লোড হচ্ছে...</span>
     </div>
   );
 }

@@ -1,7 +1,5 @@
-
 @import "tailwindcss";
 @plugin "daisyui";
-
 
 @plugin "daisyui/theme" {
   name: "bazardor";
@@ -86,16 +84,12 @@
   }
 }
 
-
-
 /* =========================================
    BAZARDOR PRICE TICKER ANIMATION
-   Tailwind CSS v4
 ========================================= */
 
 @theme {
-  --animate-bazardor-ticker:
-    bazardor-ticker-scroll 60s linear infinite;
+  --animate-bazardor-ticker: bazardor-ticker-scroll 60s linear infinite;
 
   @keyframes bazardor-ticker-scroll {
     from {
@@ -107,6 +101,3 @@
     }
   }
 }
-
-
-

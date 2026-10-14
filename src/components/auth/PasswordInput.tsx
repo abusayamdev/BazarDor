@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -21,7 +20,10 @@ export default function PasswordInput({
 
   return (
     <div>
-      <label htmlFor="password" className="mb-2 block text-sm font-medium text-base-content">
+      <label
+        htmlFor="password"
+        className="mb-2 block text-sm font-medium text-base-content"
+      >
         পাসওয়ার্ড
       </label>
 
@@ -37,18 +39,15 @@ export default function PasswordInput({
           autoComplete={autoComplete}
           disabled={disabled}
           required
-          
-       />
+        />
 
         <button
           className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-base-content/50 hover:text-primary disabled:opacity-50"
-        
           type="button"
           onClick={() => setShowPassword(!showPassword)}
           disabled={disabled}
           aria-label={showPassword ? "পাসওয়ার্ড লুকান" : "পাসওয়ার্ড দেখুন"}
           aria-pressed={showPassword}
-          
         >
           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>

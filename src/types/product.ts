@@ -1,4 +1,3 @@
-
 export type PriceDirection = "up" | "down" | "flat";
 
 export interface Product {

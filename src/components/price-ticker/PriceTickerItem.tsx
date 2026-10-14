@@ -1,27 +1,15 @@
-
 import type { Product } from "@/types/product";
 
-import {
-  formatPrice,
-  formatPercentage,
-  formatUnit,
-} from "@/lib/formatters";
+import { formatPrice, formatPercentage, formatUnit } from "@/lib/formatters";
 
 interface PriceTickerItemProps {
   product: Product;
 }
 
-export default function PriceTickerItem({
-  product,
-}: PriceTickerItemProps) {
+export default function PriceTickerItem({ product }: PriceTickerItemProps) {
   const { dir, pct } = product.change;
 
-  const changeIcon =
-    dir === "up"
-      ? "▲"
-      : dir === "down"
-        ? "▼"
-        : "—";
+  const changeIcon = dir === "up" ? "▲" : dir === "down" ? "▼" : "—";
 
   // Figma ticker colors
   const changeColor =
@@ -52,17 +40,12 @@ export default function PriceTickerItem({
       "
     >
       {/* Product Emoji */}
-      <span
-        aria-hidden="true"
-        className="text-base"
-      >
+      <span aria-hidden="true" className="text-base">
         {emoji}
       </span>
 
       {/* Product Name */}
-      <span className="font-medium text-base-content">
-        {product.nameBn}
-      </span>
+      <span className="font-medium text-base-content">{product.nameBn}</span>
 
       {/* Current Price */}
       <span className="text-base-content">

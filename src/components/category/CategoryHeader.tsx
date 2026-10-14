@@ -1,16 +1,10 @@
-
 import type { Category } from "@/types/category";
 
 interface CategoryHeaderProps {
   category: Category;
-  
 }
 
-export default function CategoryHeader({
-  category,
-
-}: CategoryHeaderProps) {
-
+export default function CategoryHeader({ category }: CategoryHeaderProps) {
   return (
     <div className="mb-8">
       <div className="flex items-center gap-3">
@@ -23,7 +17,6 @@ export default function CategoryHeader({
           </span>
         )}
 
-
         <div>
           <h1 className="text-2xl font-bold text-base-content sm:text-3xl">
             {category.nameBn}
@@ -35,7 +28,5 @@ export default function CategoryHeader({
         </div>
       </div>
     </div>
-
-
   );
 }

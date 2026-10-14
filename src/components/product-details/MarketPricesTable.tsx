@@ -1,4 +1,3 @@
-
 import type { MarketPrice } from "@/types/product-detail";
 import { formatPrice, formatUnit } from "@/lib/formatters";
 
@@ -19,7 +18,8 @@ export default function MarketPricesTable({
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-base-content/60">
-          বিভিন্ন বাজারে প্রতি {formatUnit(unit)} পণ্যের সর্বনিম্ন ও সর্বোচ্চ দামের তুলনা।
+          বিভিন্ন বাজারে প্রতি {formatUnit(unit)} পণ্যের সর্বনিম্ন ও সর্বোচ্চ
+          দামের তুলনা।
         </p>
       </div>
 

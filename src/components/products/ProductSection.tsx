@@ -1,4 +1,3 @@
-
 import type { Product } from "@/types/product";
 
 import ProductCard from "./ProductCard";
@@ -32,17 +31,12 @@ export default function ProductSection({
 
       {products.length === 0 ? (
         <div className="rounded-xl border border-dashed border-base-300 bg-base-100 p-10 text-center">
-          <p className="text-base-content/60">
-            {emptyMessage}
-          </p>
+          <p className="text-base-content/60">{emptyMessage}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       )}

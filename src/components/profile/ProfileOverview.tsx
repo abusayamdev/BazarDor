@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 import { requireSession } from "@/lib/require-session";
 
@@ -8,7 +9,9 @@ export default async function ProfileOverview() {
   return (
     <section className="mx-auto w-full max-w-2xl">
       <div className="rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm sm:p-8">
+        {/* Profile Header */}
         <div className="flex flex-col items-center gap-4 text-center">
+          {/* Avatar */}
           <div className="avatar avatar-placeholder">
             <div className="w-20 rounded-full bg-primary text-primary-content">
               <span className="text-3xl font-bold">
@@ -17,45 +20,47 @@ export default async function ProfileOverview() {
             </div>
           </div>
 
+          {/* User Information */}
           <div>
             <h1 className="text-2xl font-bold text-base-content">
               {user.name}
             </h1>
 
-            <p className="mt-1 text-sm text-base-content/60">
-              {user.email}
-            </p>
+            <p className="mt-1 text-sm text-base-content/60">{user.email}</p>
           </div>
 
+          {/* Login Status */}
           <span className="badge badge-success badge-soft">
             লগইন করা হয়েছে
           </span>
         </div>
 
+        {/* Personal Information */}
         <div className="mt-8 border-t border-base-300 pt-6">
-          <h2 className="text-lg font-semibold text-base-content">
-            ব্যক্তিগত তথ্য
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold text-base-content">
+              ব্যক্তিগত তথ্য
+            </h2>
+
+            {/* Update Profile Button */}
+            <Link href="/profile/update" className="btn btn-primary btn-sm">
+              তথ্য আপডেট করুন
+            </Link>
+          </div>
 
           <div className="mt-5 space-y-4">
+            {/* Name */}
             <div>
-              <p className="text-xs text-base-content/50">
-                নাম
-              </p>
+              <p className="text-xs text-base-content/50">নাম</p>
 
-              <p className="mt-1 font-medium">
-                {user.name}
-              </p>
+              <p className="mt-1 font-medium">{user.name}</p>
             </div>
 
+            {/* Email */}
             <div>
-              <p className="text-xs text-base-content/50">
-                ইমেইল
-              </p>
+              <p className="text-xs text-base-content/50">ইমেইল</p>
 
-              <p className="mt-1 break-all font-medium">
-                {user.email}
-              </p>
+              <p className="mt-1 break-all font-medium">{user.email}</p>
             </div>
           </div>
         </div>

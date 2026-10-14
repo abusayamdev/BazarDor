@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 
 import ProductDetailsContent from "@/components/product-details/ProductDetailsContent";

@@ -1,4 +1,3 @@
-
 import { getProducts } from "@/lib/products";
 
 import ProductSection from "./ProductSection";
@@ -12,7 +11,10 @@ export default async function HomeProducts() {
     console.error("Failed to load home products:", error);
 
     return (
-      <section id="সব-পণ্য" className="rounded-xl border border-error/20 bg-base-100 p-8 text-center">
+      <section
+        id="সব-পণ্য"
+        className="rounded-xl border border-error/20 bg-base-100 p-8 text-center"
+      >
         <h2 className="text-xl font-semibold text-error">
           পণ্যের তথ্য লোড করা যাচ্ছে না।
         </h2>
@@ -26,18 +28,12 @@ export default async function HomeProducts() {
 
   const priceRisers = products
     .filter((product) => product.change.dir === "up")
-    .sort(
-      (a, b) =>
-        Math.abs(b.change.pct) - Math.abs(a.change.pct)
-    )
+    .sort((a, b) => Math.abs(b.change.pct) - Math.abs(a.change.pct))
     .slice(0, 6);
 
   const priceFallers = products
     .filter((product) => product.change.dir === "down")
-    .sort(
-      (a, b) =>
-        Math.abs(b.change.pct) - Math.abs(a.change.pct)
-    )
+    .sort((a, b) => Math.abs(b.change.pct) - Math.abs(a.change.pct))
     .slice(0, 6);
 
   return (

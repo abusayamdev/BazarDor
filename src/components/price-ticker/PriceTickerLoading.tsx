@@ -1,4 +1,3 @@
-
 export default function PriceTickerLoading() {
   return (
     <div
@@ -22,9 +21,7 @@ export default function PriceTickerLoading() {
         />
       ))}
 
-      <span className="sr-only">
-        বাজারদর লোড হচ্ছে...
-      </span>
+      <span className="sr-only">বাজারদর লোড হচ্ছে...</span>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-
 import { notFound } from "next/navigation";
 
 import { requireSession } from "@/lib/require-session";
@@ -30,17 +29,13 @@ export default async function ProductDetailsContent({
 
   return (
     <div className="space-y-10">
-
       <ProductDetailsHeader product={product} />
 
       <ProductPriceSummary markets={product.markets} />
 
       <ProductPriceHistory product={product} />
 
-      <MarketPricesTable
-        markets={product.markets}
-        unit={product.unit}
-      />
+      <MarketPricesTable markets={product.markets} unit={product.unit} />
     </div>
   );
 }

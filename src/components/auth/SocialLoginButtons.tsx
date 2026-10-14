@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -37,9 +36,7 @@ export default function SocialLoginButtons() {
     <div className="mt-6">
       <div className="mb-5 flex items-center gap-3">
         <span className="h-px flex-1 bg-base-300" />
-        <span className="text-xs text-base-content/50">
-          অথবা
-        </span>
+        <span className="text-xs text-base-content/50">অথবা</span>
         <span className="h-px flex-1 bg-base-300" />
       </div>
 

@@ -1,4 +1,3 @@
-
 import { notFound } from "next/navigation";
 
 import { getCategories } from "@/lib/categories";

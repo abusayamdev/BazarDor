@@ -1,4 +1,3 @@
-
 import CategoryLoading from "@/components/category/CategoryLoading";
 
 export default function Loading() {

@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 
 import CategoryContent from "@/components/category/CategoryContent";

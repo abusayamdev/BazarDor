@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -9,10 +8,7 @@ interface CategoryErrorProps {
   reset: () => void;
 }
 
-export default function CategoryError({
-  error,
-  reset,
-}: CategoryErrorProps) {
+export default function CategoryError({ error, reset }: CategoryErrorProps) {
   useEffect(() => {
     console.error("Category page error:", error);
   }, [error]);
@@ -29,11 +25,7 @@ export default function CategoryError({
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={reset}
-            className="btn btn-primary"
-          >
+          <button type="button" onClick={reset} className="btn btn-primary">
             আবার চেষ্টা করুন
           </button>
 
