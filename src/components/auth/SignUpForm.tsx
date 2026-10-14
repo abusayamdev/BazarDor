@@ -1,0 +1,128 @@
+
+"use client";
+
+import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
+import { authClient } from "@/lib/auth-client";
+import PasswordInput from "./PasswordInput";
+
+export default function SignInForm() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setErrorMessage("");
+
+    if (!email.trim() || !password) {
+      const message = "ইমেইল ও পাসওয়ার্ড লিখুন।";
+      setErrorMessage(message);
+      toast.error(message);
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      const message = "সঠিক ইমেইল অ্যাড্রেস লিখুন।";
+      setErrorMessage(message);
+      toast.error(message);
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await authClient.signIn.email({
+        email: email.trim().toLowerCase(),
+        password,
+        rememberMe: true,
+      });
+
+      if (error) {
+        const message = error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।";
+        setErrorMessage(message);
+        toast.error(message);
+        return;
+      }
+
+      toast.success("সফলভাবে লগইন হয়েছে!");
+
+      const params = new URLSearchParams(window.location.search);
+      const redirectPath = params.get("redirect");
+
+      const destination =
+        redirectPath?.startsWith("/") &&
+        !redirectPath.startsWith("//") &&
+        !redirectPath.includes("\\")
+          ? redirectPath
+          : "/";
+
+      router.replace(destination);
+      router.refresh();
+    } catch {
+      const message = "লগইন করা যাচ্ছে না। আবার চেষ্টা করুন।";
+      setErrorMessage(message);
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <div>
+        <label
+          htmlFor="signin-email"
+          className="mb-2 block text-sm font-medium text-base-content"
+        >
+          ইমেইল অ্যাড্রেস
+        </label>
+
+        <input
+          id="signin-email"
+          name="email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="example@gmail.com"
+          autoComplete="email"
+          disabled={isSubmitting}
+          required
+          className="input input-bordered h-12 w-full focus:border-primary focus:outline-none"
+        />
+      </div>
+
+      <PasswordInput
+        value={password}
+        onChange={setPassword}
+        disabled={isSubmitting}
+      />
+
+      {errorMessage && (
+        <p role="alert" className="text-sm text-error">
+          {errorMessage}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="btn btn-primary h-12 w-full"
+      >
+        {isSubmitting ? (
+          <>
+            <span className="loading loading-spinner loading-sm" />
+            লগইন হচ্ছে...
+          </>
+        ) : (
+          "সাইন ইন"
+        )}
+      </button>
+    </form>
+  );
+}

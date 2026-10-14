@@ -1,6 +1,7 @@
 
 import { notFound } from "next/navigation";
 
+import { requireSession } from "@/lib/require-session";
 import { getProductBySlug } from "@/lib/product-details";
 
 import ProductDetailsHeader from "./ProductDetailsHeader";
@@ -19,6 +20,8 @@ export default async function ProductDetailsContent({
 }: ProductDetailsContentProps) {
   const { slug } = await params;
 
+  await requireSession(`/product/${encodeURIComponent(slug)}`);
+
   const product = await getProductBySlug(slug);
 
   if (!product) {
@@ -27,6 +30,7 @@ export default async function ProductDetailsContent({
 
   return (
     <div className="space-y-10">
+
       <ProductDetailsHeader product={product} />
 
       <ProductPriceSummary markets={product.markets} />

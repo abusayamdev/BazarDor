@@ -18,6 +18,7 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 8,
     requireEmailVerification: false,
+    autoSignIn: false,
   },
 
   socialProviders: {
@@ -41,6 +42,4 @@ export const auth = betterAuth({
         }
       : {}),
   },
-
-  
 });

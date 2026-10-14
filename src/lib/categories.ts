@@ -1,4 +1,3 @@
-
 import type { Category } from "@/types/category";
 
 const BASE_URL =

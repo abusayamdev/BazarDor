@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 
 import Navbar from "@/components/navbar/Navbar";
+import AuthToaster from "@/components/auth/AuthToaster";
 
 import "./globals.css";
 
-// Google Font
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali", "latin"],
   weight: ["400", "500", "600", "700"],
@@ -14,22 +14,18 @@ const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind-siliguri",
 });
 
-// Website Metadata
 export const metadata: Metadata = {
   title: {
     default: "বাজার দর | BazarDor",
     template: "%s | বাজার দর",
   },
-
   description:
     "বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের বাজারদর, দামের পরিবর্তন এবং বাজারভিত্তিক মূল্য জানুন।",
-
   icons: {
     icon: "/images/logo-icon.png",
   },
 };
 
-// Root Layout
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,20 +37,14 @@ export default function RootLayout({
       data-theme="bazardor"
       className={hindSiliguri.variable}
     >
-      <body
-        className="
-          min-h-screen bg-base-100
-          font-sans text-base-content
-          antialiased
-        "
-      >
-        {/* Global Navbar */}
+      <body className="min-h-screen bg-base-100 font-sans text-base-content antialiased">
         <Navbar />
 
-        {/* Page Content */}
-        <main className="min-h-[calc(100vh-68px)]">
+        <main className="min-h-[calc(100vh-154px)]">
           {children}
         </main>
+
+        <AuthToaster />
       </body>
     </html>
   );
