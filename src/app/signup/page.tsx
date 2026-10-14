@@ -5,6 +5,15 @@ import SignUpForm from "@/components/auth/SignUpForm";
 import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
 
 export default function SignUpPage() {
+  const providers = {
+    google: Boolean(
+      process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET,
+    ),
+    github: Boolean(
+      process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET,
+    ),
+  };
+
   return (
     <div className="mx-auto flex min-h-[calc(100vh-180px)] w-full max-w-[1152px] items-center justify-center px-4 py-12">
       <AuthCard
@@ -13,7 +22,7 @@ export default function SignUpPage() {
       >
         <SignUpForm />
 
-        <SocialLoginButtons />
+        <SocialLoginButtons providers={providers} />
 
         <p className="mt-7 text-center text-sm text-base-content/60">
           ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}

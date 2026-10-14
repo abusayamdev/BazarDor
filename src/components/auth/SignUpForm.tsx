@@ -2,14 +2,17 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { LoaderCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 import { authClient } from "@/lib/auth-client";
+import { getSafeRedirectPath } from "@/lib/safe-redirect";
 import PasswordInput from "./PasswordInput";
 
-export default function SignInForm() {
+export default function SignUpForm() {
   const router = useRouter();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,15 +22,25 @@ export default function SignInForm() {
     event.preventDefault();
     setErrorMessage("");
 
-    if (!email.trim() || !password) {
-      const message = "ইমেইল ও পাসওয়ার্ড লিখুন।";
+    const trimmedName = name.trim();
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (trimmedName.length < 2 || trimmedName.length > 80) {
+      const message = "নাম ২ থেকে ৮০ অক্ষরের মধ্যে হতে হবে।";
       setErrorMessage(message);
       toast.error(message);
       return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       const message = "সঠিক ইমেইল অ্যাড্রেস লিখুন।";
+      setErrorMessage(message);
+      toast.error(message);
+      return;
+    }
+
+    if (password.length < 8) {
+      const message = "পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।";
       setErrorMessage(message);
       toast.error(message);
       return;
@@ -36,35 +49,31 @@ export default function SignInForm() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await authClient.signIn.email({
-        email: email.trim().toLowerCase(),
+      const { error } = await authClient.signUp.email({
+        name: trimmedName,
+        email: normalizedEmail,
         password,
-        rememberMe: true,
+        callbackURL: getSafeRedirectPath(
+          new URLSearchParams(window.location.search).get("redirect"),
+        ),
       });
 
       if (error) {
-        const message = error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।";
+        const message = error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।";
         setErrorMessage(message);
         toast.error(message);
         return;
       }
 
-      toast.success("সফলভাবে লগইন হয়েছে!");
-
-      const params = new URLSearchParams(window.location.search);
-      const redirectPath = params.get("redirect");
-
-      const destination =
-        redirectPath?.startsWith("/") &&
-        !redirectPath.startsWith("//") &&
-        !redirectPath.includes("\\")
-          ? redirectPath
-          : "/";
-
-      router.replace(destination);
+      toast.success("আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
+      router.replace(
+        getSafeRedirectPath(
+          new URLSearchParams(window.location.search).get("redirect"),
+        ),
+      );
       router.refresh();
     } catch {
-      const message = "লগইন করা যাচ্ছে না। আবার চেষ্টা করুন।";
+      const message = "অ্যাকাউন্ট তৈরি করা যাচ্ছে না। আবার চেষ্টা করুন।";
       setErrorMessage(message);
       toast.error(message);
     } finally {
@@ -76,14 +85,36 @@ export default function SignInForm() {
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <div>
         <label
-          htmlFor="signin-email"
+          htmlFor="signup-name"
+          className="mb-2 block text-sm font-medium text-base-content"
+        >
+          আপনার নাম
+        </label>
+        <input
+          id="signup-name"
+          name="name"
+          type="text"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          placeholder="আপনার পূর্ণ নাম লিখুন"
+          autoComplete="name"
+          minLength={2}
+          maxLength={80}
+          disabled={isSubmitting}
+          required
+          className="input input-bordered h-12 w-full focus:border-primary focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="signup-email"
           className="mb-2 block text-sm font-medium text-base-content"
         >
           ইমেইল অ্যাড্রেস
         </label>
-
         <input
-          id="signin-email"
+          id="signup-email"
           name="email"
           type="email"
           value={email}
@@ -99,6 +130,7 @@ export default function SignInForm() {
       <PasswordInput
         value={password}
         onChange={setPassword}
+        autoComplete="new-password"
         disabled={isSubmitting}
       />
 
@@ -115,11 +147,11 @@ export default function SignInForm() {
       >
         {isSubmitting ? (
           <>
-            <span className="loading loading-spinner loading-sm" />
-            লগইন হচ্ছে...
+            <LoaderCircle size={18} className="animate-spin" />
+            অ্যাকাউন্ট তৈরি হচ্ছে...
           </>
         ) : (
-          "সাইন ইন"
+          "সাইন আপ"
         )}
       </button>
     </form>

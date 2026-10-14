@@ -6,19 +6,30 @@ import { LoaderCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 import { authClient } from "@/lib/auth-client";
+import { getSafeRedirectPath } from "@/lib/safe-redirect";
 
 type SocialProvider = "google" | "github";
 
-export default function SocialLoginButtons() {
+interface SocialLoginButtonsProps {
+  providers: Record<SocialProvider, boolean>;
+}
+
+export default function SocialLoginButtons({
+  providers,
+}: SocialLoginButtonsProps) {
   const [loading, setLoading] = useState<SocialProvider | null>(null);
 
   const handleSocialLogin = async (provider: SocialProvider) => {
     setLoading(provider);
 
     try {
+      const callbackPath = getSafeRedirectPath(
+        new URLSearchParams(window.location.search).get("redirect"),
+      );
       const { error } = await authClient.signIn.social({
         provider,
-        callbackURL: "/?auth=success",
+        callbackURL:
+          callbackPath === "/" ? "/?auth=success" : callbackPath,
         errorCallbackURL: "/signin?oauthError=1",
       });
 
@@ -44,7 +55,12 @@ export default function SocialLoginButtons() {
         <button
           type="button"
           onClick={() => handleSocialLogin("google")}
-          disabled={loading !== null}
+          disabled={loading !== null || !providers.google}
+          title={
+            providers.google
+              ? "Google দিয়ে চালিয়ে যান"
+              : "Google OAuth credentials কনফিগার করা নেই"
+          }
           className="flex h-11 items-center justify-center gap-2 rounded-lg border border-base-300 bg-base-100 text-sm font-medium text-base-content transition-colors hover:bg-base-200 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading === "google" ? (
@@ -59,7 +75,12 @@ export default function SocialLoginButtons() {
         <button
           type="button"
           onClick={() => handleSocialLogin("github")}
-          disabled={loading !== null}
+          disabled={loading !== null || !providers.github}
+          title={
+            providers.github
+              ? "GitHub দিয়ে চালিয়ে যান"
+              : "GitHub OAuth credentials কনফিগার করা নেই"
+          }
           className="flex h-11 items-center justify-center gap-2 rounded-lg border border-base-300 bg-base-100 text-sm font-medium text-base-content transition-colors hover:bg-base-200 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading === "github" ? (

@@ -6,6 +6,15 @@ import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
 import AuthNotice from "@/components/auth/AuthNotice";
 
 export default function SignInPage() {
+  const providers = {
+    google: Boolean(
+      process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET,
+    ),
+    github: Boolean(
+      process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET,
+    ),
+  };
+
   return (
     <div className="mx-auto flex min-h-[calc(100vh-180px)] w-full max-w-[1152px] items-center justify-center px-4 py-12">
       <AuthNotice page="signin" />
@@ -16,7 +25,7 @@ export default function SignInPage() {
       >
         <SignInForm />
 
-        <SocialLoginButtons />
+        <SocialLoginButtons providers={providers} />
 
         <p className="mt-7 text-center text-sm text-base-content/60">
           আপনার কোনো অ্যাকাউন্ট নেই?{" "}

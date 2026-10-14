@@ -6,6 +6,7 @@ import { LoaderCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 import { authClient } from "@/lib/auth-client";
+import { getSafeRedirectPath } from "@/lib/safe-redirect";
 import PasswordInput from "./PasswordInput";
 
 export default function SignInForm() {
@@ -52,7 +53,10 @@ export default function SignInForm() {
 
       toast.success("সফলভাবে লগইন হয়েছে!");
 
-      router.replace("/");
+      const destination = getSafeRedirectPath(
+        new URLSearchParams(window.location.search).get("redirect"),
+      );
+      router.replace(destination);
       router.refresh();
     } catch {
       const message = "লগইন করা যাচ্ছে না। আবার চেষ্টা করুন।";

@@ -6,7 +6,9 @@ import { db, mongoClient } from "./mongodb";
 export const auth = betterAuth({
   appName: "BazarDor",
 
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL:
+    process.env.BETTER_AUTH_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
   secret: process.env.BETTER_AUTH_SECRET,
 
   database: mongodbAdapter(db, {
@@ -17,7 +19,7 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 8,
     requireEmailVerification: false,
-    autoSignIn: false,
+    autoSignIn: true,
   },
 
   socialProviders: {

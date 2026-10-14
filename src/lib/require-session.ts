@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
+import { getSafeRedirectPath } from "@/lib/safe-redirect";
 
 export async function requireSession(returnTo: string) {
   const session = await auth.api.getSession({
@@ -13,7 +14,7 @@ export async function requireSession(returnTo: string) {
   if (!session) {
     const query = new URLSearchParams({
       reason: "login-required",
-      redirect: returnTo,
+      redirect: getSafeRedirectPath(returnTo),
     });
 
     redirect(`/signin?${query.toString()}`);
